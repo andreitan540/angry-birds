@@ -9,6 +9,7 @@ var porco1 , porco2;
 var tronco1, tronco2, tronco3, tronco4;
 var passarinho;
 var fundo;
+var plataforma;
 
     
 function preload(){
@@ -22,6 +23,8 @@ function setup(){
     world = engine.world;
 
     ground = new Ground(600, 390, 1200, 20)
+
+    plataforma = new Ground(150, 305, 300, 170);
 
     box1 = new Box(700,320,70,70);
     box2 = new Box(920,320,70,70);
@@ -59,4 +62,6 @@ function draw(){
     tronco4.display();
 
     passarinho.display();
+
+    plataforma.display();
 }
