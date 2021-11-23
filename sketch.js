@@ -1,6 +1,7 @@
 const Engine = Matter.Engine;
-const World= Matter.World;
+const World = Matter.World;
 const Bodies = Matter.Bodies;
+const Constraint = Matter.Constraint;
 
 var engine, world;
 var box1 , box2, box3 , box4, box5;
@@ -10,6 +11,7 @@ var tronco1, tronco2, tronco3, tronco4;
 var passarinho;
 var fundo;
 var plataforma;
+var estilingue;
 
     
 function preload(){
@@ -41,6 +43,9 @@ function setup(){
     tronco4 = new Tronco(870, 120, 150, -PI/7);
 
     passarinho = new Bird(100, 100)
+   
+    estilingue = new Estilingue(passarinho.body, { x: 200, y: 50 })
+
 }
 
 function draw(){
@@ -64,4 +69,18 @@ function draw(){
     passarinho.display();
 
     plataforma.display();
+
+    estilingue.display();
+
+    
+}
+
+function mouseDragged(){
+Matter.Body.setPosition(passarinho.body,{x: mouseX, y: mouseY} );
+
+}
+
+function mouseReleased(){
+estilingue.lanca()
+
 }

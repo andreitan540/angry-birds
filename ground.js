@@ -15,6 +15,7 @@ this.body = Bodies.rectangle(x, y, largura, altura, options);
 display(){
     var pos =this.body.position;
     rectMode(CENTER);
+    noStroke()
     fill("brown");
     rect(pos.x, pos.y, this.largura, this.altura);
   }
