@@ -84,3 +84,12 @@ function mouseReleased(){
 estilingue.lanca()
 
 }
+
+function keyPressed(){
+if (keyCode === 32) {
+estilingue.anexa(passarinho.body)
+
+
+}
+
+}
