@@ -7,17 +7,18 @@ class Bird extends Base {
     }
   
     display(){
-      var posicao =this.body.position;
-      //pos.x = mouseX
-      //pos.y = mouseY
-      var posicaoPassaro = [posicao.x, posicao.y]
-      this.trajetoria.push(posicaoPassaro)
-     
-      for (var item = 0; item < this.trajetoria.length; item++) {
-       image(this.fumaca, this.trajetoria[item][0],this.trajetoria[item][1])
+        var posicao =this.body.position;
         
-      }
-       super.display()
+        if (this.body.velocity.x >10 && posicao.x > 300) {
+            var posicaoPassaro = [posicao.x, posicao.y]
+            this.trajetoria.push(posicaoPassaro)
+        }
+     
+        for (var item = 0; item < this.trajetoria.length; item++) {
+            image(this.fumaca, this.trajetoria[item][0],this.trajetoria[item][1])
+        }
+        
+        super.display()
     }
-  };
+};
   

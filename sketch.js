@@ -9,15 +9,18 @@ var ground;
 var porco1 , porco2;
 var tronco1, tronco2, tronco3, tronco4;
 var passarinho;
-var fundo;
+var fundo = "sprites/bg.png";
 var plataforma;
 var estilingue;
+var estado = "inicio"
+var pontuacao = 0
+var fundoImagem;
+var cor = "black";
 
-    
+
 function preload(){
-fundo = loadImage("sprites/bg.png")
+defineFundo();
 }
-
 
 function setup(){
     var canvas = createCanvas(1200,400);
@@ -45,12 +48,19 @@ function setup(){
     passarinho = new Bird(100, 100)
    
     estilingue = new Estilingue(passarinho.body, { x: 200, y: 50 })
-
 }
 
 function draw(){
-    background(fundo);
+    if (fundoImagem) {
+        background(fundoImagem);    
+    }
+   
+    textSize(20)
+    fill(cor)
+    text("Pontuação: " + pontuacao, 900,50)
+
     Engine.update(engine);
+
     box1.display();
     box2.display();
     ground.display();
@@ -72,24 +82,42 @@ function draw(){
 
     estilingue.display();
 
-    
+    porco1.placar()
+    porco2.placar()
 }
 
 function mouseDragged(){
-Matter.Body.setPosition(passarinho.body,{x: mouseX, y: mouseY} );
-
+    if (estado !== "jogando") {
+        Matter.Body.setPosition(passarinho.body,{x: mouseX, y: mouseY} );
+    }
 }
 
 function mouseReleased(){
-estilingue.lanca()
-
+    estilingue.lanca()
+    estado = "jogando"
 }
 
 function keyPressed(){
-if (keyCode === 32) {
-estilingue.anexa(passarinho.body)
-
-
+    if (keyCode === 32 && passarinho.body.speed < 1) {
+        estilingue.anexa(passarinho.body)
+        passarinho.trajetoria = []
+        estado = "inicio"
+    }
 }
+
+async function defineFundo(){
+var resposta = await fetch("https://worldtimeapi.org/api/timezone/Asia/Tokyo")
+var respostaJson = await resposta.json()
+var hora = respostaJson.datetime.slice(11, 13)
+
+if (hora >=6 && hora <=18) {
+fundo = "sprites/bg.png"
+cor = "black"    
+} else {
+fundo = "sprites/bg2.jpg" 
+cor = "white"  
+}
+
+fundoImagem = loadImage(fundo)
 
 }
