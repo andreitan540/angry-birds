@@ -1,6 +1,11 @@
 class Bird extends Base {
     constructor(x, y) {
-        super(x, y, 50, 50);
+        var options = {
+            'restitution':0.5,
+            'friction':1.0,
+            'density':1.5
+        }
+        super(x, y, 50, 50, options);
         this.imagem = loadImage("sprites/bird.png")
         this.fumaca = loadImage("sprites/smoke.png")
         this.trajetoria = []
@@ -9,7 +14,7 @@ class Bird extends Base {
     display(){
         var posicao =this.body.position;
         
-        if (this.body.velocity.x >10 && posicao.x > 300) {
+        if (this.body.velocity.x >10 && posicao.x > 300 && estado === "jogando") {
             var posicaoPassaro = [posicao.x, posicao.y]
             this.trajetoria.push(posicaoPassaro)
         }

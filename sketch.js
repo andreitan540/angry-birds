@@ -16,10 +16,12 @@ var estado = "inicio"
 var pontuacao = 0
 var fundoImagem;
 var cor = "black";
+var fundoReserva;
 
 
 function preload(){
 defineFundo();
+fundoReserva = loadImage(fundo)
 }
 
 function setup(){
@@ -53,7 +55,11 @@ function setup(){
 function draw(){
     if (fundoImagem) {
         background(fundoImagem);    
+    } else {
+        background(fundoReserva)
+
     }
+
    
     textSize(20)
     fill(cor)
@@ -106,7 +112,7 @@ function keyPressed(){
 }
 
 async function defineFundo(){
-var resposta = await fetch("https://worldtimeapi.org/api/timezone/Asia/Tokyo")
+var resposta = await fetch("https://worldtimeapi.org/api/timezone/America/Sao_Paulo")
 var respostaJson = await resposta.json()
 var hora = respostaJson.datetime.slice(11, 13)
 

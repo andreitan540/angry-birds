@@ -1,6 +1,11 @@
 class Porco extends Base {
     constructor(x, y) {
-        super(x, y, 50, 50);
+        var options = {
+            'restitution':0.8,
+            'friction':1.0,
+            'density':1.0
+        }
+        super(x, y, 50, 50, options);
         this.imagem = loadImage("sprites/enemy.png")
         this.visibilidade = 255
     }   
